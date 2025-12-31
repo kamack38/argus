@@ -30,30 +30,19 @@
  * non-zero value accordingly. It should also print any errors that may occur in format "Error: %s".
  * next_char* will always be set to NULL in required arguments.
  */
-#define REQUIRED_STRING_ARG(name, label, description) \
-    REQUIRED_ARG(char*, name, label, description, parse_str)
-#define REQUIRED_CHAR_ARG(name, label, description) \
-    REQUIRED_ARG(char, name, label, description, parse_char)
-#define REQUIRED_INT_ARG(name, label, description) \
-    REQUIRED_ARG(int, name, label, description, parse_int)
-#define REQUIRED_UINT_ARG(name, label, description) \
-    REQUIRED_ARG(unsigned int, name, label, description, parse_uint)
-#define REQUIRED_LONG_ARG(name, label, description) \
-    REQUIRED_ARG(long, name, label, description, parse_l)
-#define REQUIRED_ULONG_ARG(name, label, description) \
-    REQUIRED_ARG(unsigned long, name, label, description, parse_ul)
-#define REQUIRED_LONG_LONG_ARG(name, label, description) \
-    REQUIRED_ARG(long long, name, label, description, parse_ll)
+#define REQUIRED_STRING_ARG(name, label, description) REQUIRED_ARG(char*, name, label, description, parse_str)
+#define REQUIRED_CHAR_ARG(name, label, description) REQUIRED_ARG(char, name, label, description, parse_char)
+#define REQUIRED_INT_ARG(name, label, description) REQUIRED_ARG(int, name, label, description, parse_int)
+#define REQUIRED_UINT_ARG(name, label, description) REQUIRED_ARG(unsigned int, name, label, description, parse_uint)
+#define REQUIRED_LONG_ARG(name, label, description) REQUIRED_ARG(long, name, label, description, parse_l)
+#define REQUIRED_ULONG_ARG(name, label, description) REQUIRED_ARG(unsigned long, name, label, description, parse_ul)
+#define REQUIRED_LONG_LONG_ARG(name, label, description) REQUIRED_ARG(long long, name, label, description, parse_ll)
 #define REQUIRED_ULONG_LONG_ARG(name, label, description) \
     REQUIRED_ARG(unsigned long long, name, label, description, parse_ull)
-#define REQUIRED_SIZE_ARG(name, label, description) \
-    REQUIRED_ARG(size_t, name, label, description, parse_ull)
-#define REQUIRED_FLOAT_ARG(name, label, description) \
-    REQUIRED_ARG(float, name, label, description, parse_f)
-#define REQUIRED_DOUBLE_ARG(name, label, description) \
-    REQUIRED_ARG(double, name, label, description, parse_d)
-#define REQUIRED_LONG_DOUBLE_ARG(name, label, description) \
-    REQUIRED_ARG(long double, name, label, description, parse_ld)
+#define REQUIRED_SIZE_ARG(name, label, description) REQUIRED_ARG(size_t, name, label, description, parse_ull)
+#define REQUIRED_FLOAT_ARG(name, label, description) REQUIRED_ARG(float, name, label, description, parse_f)
+#define REQUIRED_DOUBLE_ARG(name, label, description) REQUIRED_ARG(double, name, label, description, parse_d)
+#define REQUIRED_LONG_DOUBLE_ARG(name, label, description) REQUIRED_ARG(long double, name, label, description, parse_ld)
 
 /* clang-format off */
 /**
@@ -79,32 +68,24 @@
     OPTIONAL_ARG(char, name, shortopt, longopt, arg_label, default, description, "%c", parse_char)
 #define OPTIONAL_INT_ARG(name, shortopt, longopt, arg_label, default, description) \
     OPTIONAL_ARG(int, name, shortopt, longopt, arg_label, default, description, "%d", parse_int)
-#define OPTIONAL_UINT_ARG(name, shortopt, longopt, arg_label, default, description)            \
-    OPTIONAL_ARG(unsigned int, name, shortopt, longopt, arg_label, default, description, "%u", \
-                 parse_uint)
+#define OPTIONAL_UINT_ARG(name, shortopt, longopt, arg_label, default, description) \
+    OPTIONAL_ARG(unsigned int, name, shortopt, longopt, arg_label, default, description, "%u", parse_uint)
 #define OPTIONAL_LONG_ARG(name, shortopt, longopt, arg_label, default, description) \
     OPTIONAL_ARG(long, name, shortopt, longopt, arg_label, default, description, "%ld", parse_l)
-#define OPTIONAL_ULONG_ARG(name, shortopt, longopt, arg_label, default, description)             \
-    OPTIONAL_ARG(unsigned long, name, shortopt, longopt, arg_label, default, description, "%lu", \
-                 parse_ul)
-#define OPTIONAL_LONG_LONG_ARG(name, shortopt, longopt, arg_label, default, description)      \
-    OPTIONAL_ARG(long long, name, shortopt, longopt, arg_label, default, description, "%lld", \
-                 parse_ll)
-#define OPTIONAL_ULONG_LONG_ARG(name, shortopt, longopt, arg_label, default, description)      \
-    OPTIONAL_ARG(unsigned long long, name, shortopt, longopt, arg_label, default, description, \
-                 "%llu", parse_ull)
+#define OPTIONAL_ULONG_ARG(name, shortopt, longopt, arg_label, default, description) \
+    OPTIONAL_ARG(unsigned long, name, shortopt, longopt, arg_label, default, description, "%lu", parse_ul)
+#define OPTIONAL_LONG_LONG_ARG(name, shortopt, longopt, arg_label, default, description) \
+    OPTIONAL_ARG(long long, name, shortopt, longopt, arg_label, default, description, "%lld", parse_ll)
+#define OPTIONAL_ULONG_LONG_ARG(name, shortopt, longopt, arg_label, default, description) \
+    OPTIONAL_ARG(unsigned long long, name, shortopt, longopt, arg_label, default, description, "%llu", parse_ull)
 #define OPTIONAL_SIZE_ARG(name, shortopt, longopt, arg_label, default, description) \
     OPTIONAL_ARG(size_t, name, shortopt, longopt, arg_label, default, description, "%zu", parse_ull)
 #define OPTIONAL_FLOAT_ARG(name, shortopt, longopt, arg_label, default, description, precision) \
-    OPTIONAL_ARG(float, name, shortopt, longopt, arg_label, default, description,               \
-                 "%." #precision "g", parse_f)
+    OPTIONAL_ARG(float, name, shortopt, longopt, arg_label, default, description, "%." #precision "g", parse_f)
 #define OPTIONAL_DOUBLE_ARG(name, shortopt, longopt, arg_label, default, description, precision) \
-    OPTIONAL_ARG(double, name, shortopt, longopt, arg_label, default, description,               \
-                 "%." #precision "g", parse_d)
-#define OPTIONAL_LONG_DOUBLE_ARG(name, shortopt, longopt, arg_label, default, description, \
-                                 precision)                                                \
-    OPTIONAL_ARG(long double, name, shortopt, longopt, arg_label, default, description,    \
-                 "%." #precision "g", parse_ld)
+    OPTIONAL_ARG(double, name, shortopt, longopt, arg_label, default, description, "%." #precision "g", parse_d)
+#define OPTIONAL_LONG_DOUBLE_ARG(name, shortopt, longopt, arg_label, default, description, precision) \
+    OPTIONAL_ARG(long double, name, shortopt, longopt, arg_label, default, description, "%." #precision "g", parse_ld)
 
 /**
  * @def BOOLEAN_ARG(name, shortopt, longopt, description)
@@ -279,39 +260,36 @@ static inline int parse_args(int argc, char* argv[], args_t* args) {
 
     // Get optional and boolean arguments
     for (int i = 1 + REQUIRED_ARG_COUNT; i < argc; i++) {
-#define DO_GENERATE_LONG_OPT(name, longopt, parser)                                            \
-    if (!strcmp(argv[i], "--" #longopt)) {                                                     \
-        if (i + 1 >= argc) {                                                                   \
-            fprintf(stderr, "Error: option '%s' requires a value.\n", "--" #longopt);          \
-            return 1;                                                                          \
-        }                                                                                      \
-        char* next_char = NULL;                                                                \
-        int error = parser(argv[++i], &args->name, &next_char);                                \
-        if (error != 0) {                                                                      \
-            return 1; /* The parser should notify the user of an error */                      \
-        }                                                                                      \
-        /* We don't allow parsing only part of an option */                                    \
-        if (next_char != NULL && *next_char != '\0') {                                         \
-            fprintf(stderr, "Error: couldn't parse argument '%s' for option '%s'.\n", argv[i], \
-                    "--" #longopt);                                                            \
-            return 1;                                                                          \
-        }                                                                                      \
-        continue;                                                                              \
+#define GENERATE_LONG_OPT(name, longopt, parser)                                                               \
+    if (!strcmp(argv[i], "--" #longopt)) {                                                                     \
+        if (i + 1 >= argc) {                                                                                   \
+            fprintf(stderr, "Error: option '%s' requires a value.\n", "--" #longopt);                          \
+            return 1;                                                                                          \
+        }                                                                                                      \
+        char* next_char = NULL;                                                                                \
+        int error = parser(argv[++i], &args->name, &next_char);                                                \
+        if (error != 0) {                                                                                      \
+            return 1; /* The parser should notify the user of an error */                                      \
+        }                                                                                                      \
+        /* We don't allow parsing only part of an option */                                                    \
+        if (next_char != NULL && *next_char != '\0') {                                                         \
+            fprintf(stderr, "Error: couldn't parse argument '%s' for option '%s'.\n", argv[i], "--" #longopt); \
+            return 1;                                                                                          \
+        }                                                                                                      \
+        continue;                                                                                              \
     }
 
 // This generates the long opt parsing for an optional argument if it's not NONE
-#define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, default, description, formatter, \
-                     parser)                                                                    \
-    NOT_NONE(longopt, DO_GENERATE_LONG_OPT)(name, longopt, parser)
+#define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, default, description, formatter, parser) \
+    NOT_NONE(longopt, GENERATE_LONG_OPT)(name, longopt, parser)
 
-#define DO_GENERATE_LONG_BOOL(name, longopt) \
-    if (!strcmp(argv[i], "--" #longopt)) {   \
-        args->name = true;                   \
-        continue;                            \
+#define GENERATE_LONG_BOOL(name, longopt)  \
+    if (!strcmp(argv[i], "--" #longopt)) { \
+        args->name = true;                 \
+        continue;                          \
     }
 
-#define BOOLEAN_ARG(name, shortopt, longopt, description) \
-    NOT_NONE(longopt, DO_GENERATE_LONG_BOOL)(name, longopt)
+#define BOOLEAN_ARG(name, shortopt, longopt, description) NOT_NONE(longopt, GENERATE_LONG_BOOL)(name, longopt)
 
 #ifdef OPTIONAL_ARGS
         OPTIONAL_ARGS
@@ -327,7 +305,7 @@ static inline int parse_args(int argc, char* argv[], args_t* args) {
         // Parse flags
         if (argv[i][0] == '-') {
             char* curr_flag = argv[i] + 1;
-#define DO_GENERATE_SHORT_OPT(name, shortopt, parser)                                 \
+#define GENERATE_SHORT_OPT(name, shortopt, parser)                                    \
     if (*curr_flag == #shortopt[0]) {                                                 \
         if (curr_flag[1] == '\0') {                                                   \
             fprintf(stderr, "Error: option '%s' requires a value.\n", "-" #shortopt); \
@@ -343,19 +321,17 @@ static inline int parse_args(int argc, char* argv[], args_t* args) {
         }                                                                             \
     }
 
-#define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, default, description, formatter, \
-                     parser)                                                                    \
-    NOT_NONE(shortopt, DO_GENERATE_SHORT_OPT)(name, shortopt, parser)
+#define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, default, description, formatter, parser) \
+    NOT_NONE(shortopt, GENERATE_SHORT_OPT)(name, shortopt, parser)
 
-#define DO_GENERATE_SHORT_BOOL(name, shortopt) \
-    if (*curr_flag == #shortopt[0]) {          \
-        args->name = true;                     \
-        curr_flag++;                           \
-        continue;                              \
+#define GENERATE_SHORT_BOOL(name, shortopt) \
+    if (*curr_flag == #shortopt[0]) {       \
+        args->name = true;                  \
+        curr_flag++;                        \
+        continue;                           \
     }
 
-#define BOOLEAN_ARG(name, shortopt, longopt, description) \
-    NOT_NONE(shortopt, DO_GENERATE_SHORT_BOOL)(name, shortopt)
+#define BOOLEAN_ARG(name, shortopt, longopt, description) NOT_NONE(shortopt, GENERATE_SHORT_BOOL)(name, shortopt)
 
             while (curr_flag != NULL && *curr_flag != '\0') {
 #ifdef OPTIONAL_ARGS
@@ -388,35 +364,38 @@ static inline void print_help(char* exec_alias) {
     printf("USAGE:\n");
     printf("    %s ", exec_alias);
 
+#define REQUIRED_ARG(type, name, label, ...) "<" label "> "
+
 #ifdef REQUIRED_ARGS
     if (REQUIRED_ARG_COUNT > 0 && REQUIRED_ARG_COUNT <= 3) {
-#define REQUIRED_ARG(type, name, label, ...) "<" label "> "
         printf(REQUIRED_ARGS);
-#undef REQUIRED_ARG
     } else {
         printf("<ARGUMENTS> ");
     }
 #endif
+#undef REQUIRED_ARG
+
+#define SHORT_OPT_QUICK_HELP(shortopt, arg_label) \
+    "[-" #shortopt "<" arg_label                  \
+    ">"                                           \
+    "] "
+#define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, ...) \
+    NOT_NONE(shortopt, SHORT_OPT_QUICK_HELP)(shortopt, arg_label)
+
+#define BOOLEAN_ARG_QUICK_HELP(shortopt) "[-" #shortopt "] "
+#define BOOLEAN_ARG(name, shortopt, longopt, ...) NOT_NONE(shortopt, BOOLEAN_ARG_QUICK_HELP)(shortopt)
 
 #if (OPTIONAL_ARG_COUNT + BOOLEAN_ARG_COUNT <= 3)
 #ifdef OPTIONAL_ARGS
-#define DO_GENERATE_SHORT_OPT_QUICK_HELP(shortopt, arg_label) \
-    "[-" #shortopt "<" arg_label                              \
-    ">"                                                       \
-    "] "
-#define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, ...) \
-    NOT_NONE(shortopt, DO_GENERATE_SHORT_OPT_QUICK_HELP)(shortopt, arg_label)
     printf(OPTIONAL_ARGS);
-#undef OPTIONAL_ARG
 #endif
+#undef OPTIONAL_ARG
 
 #ifdef BOOLEAN_ARGS
-#define DO_GENERATE_BOOLEAN_QUICK_HELP(shortopt) "[-" #shortopt "] "
-#define BOOLEAN_ARG(name, shortopt, longopt, ...) \
-    NOT_NONE(shortopt, DO_GENERATE_BOOLEAN_QUICK_HELP)(shortopt)
     printf(BOOLEAN_ARGS);
-#undef BOOLEAN_ARG
 #endif
+#undef BOOLEAN_ARG
+
 #else
     printf("[OPTIONS]");
 #endif
@@ -426,47 +405,46 @@ static inline void print_help(char* exec_alias) {
     // Get maximum width of labels for spacing
     int max_width = 0;
     (void)max_width;  // suppress unused variable warning
-#ifdef REQUIRED_ARGS
+
 #define REQUIRED_ARG(type, name, label, ...)  \
     {                                         \
         int len = strlen(label) + 2;          \
         if (len > max_width) max_width = len; \
     }
-    REQUIRED_ARGS
-#undef REQUIRED_ARG
-#endif
-
-#ifdef OPTIONAL_ARGS
 #define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, ...) \
     {                                                               \
         int len = 6 + strlen(#longopt) + strlen(arg_label) + 2;     \
         if (len > max_width) max_width = len;                       \
     }
-    OPTIONAL_ARGS
-#undef OPTIONAL_ARG
-#endif
-
-#ifdef BOOLEAN_ARGS
 #define BOOLEAN_ARG(name, shortopt, longopt, ...) \
     {                                             \
         int len = 4 + strlen(#longopt);           \
         if (len > max_width) max_width = len;     \
     }
-    BOOLEAN_ARGS
-#undef BOOLEAN_ARG
+
+#ifdef REQUIRED_ARGS
+    REQUIRED_ARGS
 #endif
+#undef REQUIRED_ARG
+#ifdef OPTIONAL_ARGS
+    OPTIONAL_ARGS
+#endif
+#undef OPTIONAL_ARG
+#ifdef BOOLEAN_ARGS
+    BOOLEAN_ARGS
+#endif
+#undef BOOLEAN_ARG
 
 // ARGUMENTS SECTION
-#ifdef REQUIRED_ARGS
-    printf("ARGUMENTS:\n");
-
 #define REQUIRED_ARG(type, name, label, description, ...) \
     printf("    <" label ">%*s  " description "\n", max_width - (int)strlen(label) - 1, "");
-    REQUIRED_ARGS
-#undef REQUIRED_ARG
 
+#ifdef REQUIRED_ARGS
+    printf("ARGUMENTS:\n");
+    REQUIRED_ARGS
     printf("\n");
 #endif
+#undef REQUIRED_ARG
 
 #if defined(OPTIONAL_ARGS) || defined(BOOLEAN_ARGS)
     printf("OPTIONS:\n");
@@ -486,30 +464,35 @@ static inline void print_help(char* exec_alias) {
         1
 
     // Calculate the width of the optional argument
-#define CALC_OPT_WIDTH(shortopt, longopt, arg_label) \
-    CALC_WIDTH(shortopt, longopt) - (int)strlen(arg_label) - 3
+#define CALC_OPT_WIDTH(shortopt, longopt, arg_label) CALC_WIDTH(shortopt, longopt) - (int)strlen(arg_label) - 3
 
-#ifdef OPTIONAL_ARGS
-
-#define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, default, description, formatter, \
-                     ...)                                                                       \
-    printf("    " NOT_NONE(shortopt, SHORT_HELP)(shortopt) BOTH_SET(shortopt, longopt, ", ")    \
-               NOT_NONE(longopt, LONG_HELP)(longopt) " <" arg_label ">%*s  " description        \
-                                                     " (default: " formatter ")\n",             \
+#define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, default, description, formatter, ...) \
+    printf("    "                                   /* line break */                                 \
+           NOT_NONE(shortopt, SHORT_HELP)(shortopt) /* line break */                                 \
+           BOTH_SET(shortopt, longopt, ", ")        /* line break */                                 \
+           NOT_NONE(longopt, LONG_HELP)(longopt)    /* line break */                                 \
+           " <" arg_label                                                                            \
+           ">"                                                                                       \
+           "%*s  " description " (default: " formatter ")\n",                                        \
            CALC_OPT_WIDTH(shortopt, longopt, arg_label), "", default);
-    OPTIONAL_ARGS
-#undef OPTIONAL_ARG
-#endif
 
-#ifdef BOOLEAN_ARGS
-#define BOOLEAN_ARG(name, shortopt, longopt, description)                                    \
-    printf("    " NOT_NONE(shortopt, SHORT_HELP)(shortopt) BOTH_SET(shortopt, longopt, ", ") \
-               NOT_NONE(longopt, LONG_HELP)(longopt) "%*s  " description "\n",               \
+#define BOOLEAN_ARG(name, shortopt, longopt, description)            \
+    printf("    "                                   /* line break */ \
+           NOT_NONE(shortopt, SHORT_HELP)(shortopt) /* line break */ \
+           BOTH_SET(shortopt, longopt, ", ")        /* line break */ \
+           NOT_NONE(longopt, LONG_HELP)(longopt)    /* line break */ \
+           "%*s  " description "\n",                                 \
            CALC_WIDTH(shortopt, longopt), "");
 
-    BOOLEAN_ARGS
-#undef BOOLEAN_ARG
+#ifdef OPTIONAL_ARGS
+    OPTIONAL_ARGS
 #endif
+#undef OPTIONAL_ARG
+
+#ifdef BOOLEAN_ARGS
+    BOOLEAN_ARGS
+#endif
+#undef BOOLEAN_ARG
 }
 
 #endif
