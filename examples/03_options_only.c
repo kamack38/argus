@@ -1,8 +1,7 @@
 // Usage: ./config [-c<config>] [-v] [--disable-cache] [-h]
 
 // No required arguments for this example
-#define OPTIONAL_ARGS \
-    OPTIONAL_STRING_ARG(config_file, c, config, "config", "config.ini", "Configuration file path")
+#define OPTIONAL_ARGS OPTIONAL_STRING_ARG(config_file, c, config, "config", "config.ini", "Configuration file path")
 
 /* clang-format off */
 /* Disable clang format for 'disable-cache' */

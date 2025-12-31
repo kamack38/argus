@@ -6,8 +6,7 @@
     REQUIRED_STRING_ARG(input_file, "input", "Input file path") \
     REQUIRED_STRING_ARG(output_file, "output", "Output file path")
 
-#define OPTIONAL_ARGS \
-    OPTIONAL_UINT_ARG(threads, t, threads, "threads", 1, "Number of threads to use")
+#define OPTIONAL_ARGS OPTIONAL_UINT_ARG(threads, t, threads, "threads", 1, "Number of threads to use")
 
 #define BOOLEAN_ARGS BOOLEAN_ARG(help, h, help, "Show help")
 

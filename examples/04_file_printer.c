@@ -20,14 +20,11 @@ static inline int parse_positive_int(const char* text, int* out, char** advance)
     REQUIRED_STRING_ARG(input_file, "input", "Input file path") \
     REQUIRED_STRING_ARG(output_file, "output", "Output file path")
 
-#define OPTIONAL_ARGS                                                                          \
-    OPTIONAL_STRING_ARG(pattern, c, contains, "pattern", "",                                   \
-                        "Print only lines containing the pattern")                             \
-    OPTIONAL_UINT_ARG(threads, t, threads, "threads", 1, "Number of threads to use")           \
-    OPTIONAL_ARG(int, head, h, head, "lines", -1, "Number of lines to print from start", "%d", \
-                 parse_positive_int)                                                           \
-    OPTIONAL_ARG(int, tail, t, tail, "lines", -1, "Number of lines to print from end", "%d",   \
-                 parse_positive_int)
+#define OPTIONAL_ARGS                                                                                              \
+    OPTIONAL_STRING_ARG(pattern, c, contains, "pattern", "", "Print only lines containing the pattern")            \
+    OPTIONAL_UINT_ARG(threads, t, threads, "threads", 1, "Number of threads to use")                               \
+    OPTIONAL_ARG(int, head, h, head, "lines", -1, "Number of lines to print from start", "%d", parse_positive_int) \
+    OPTIONAL_ARG(int, tail, t, tail, "lines", -1, "Number of lines to print from end", "%d", parse_positive_int)
 
 #define BOOLEAN_ARGS                                     \
     BOOLEAN_ARG(sort, s, sort, "Sort lines")             \

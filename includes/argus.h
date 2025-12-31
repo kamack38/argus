@@ -316,9 +316,8 @@ static inline int parse_args(int argc, char* argv[], args_t* args) {
             return 1; /* The parser should notify the user of an error */             \
         }                                                                             \
         /* We set the flag to NULL when we read all of the remaning string  */        \
-        if (curr_flag == NULL || *curr_flag == '\0') {                                \
-            continue;                                                                 \
-        }                                                                             \
+        /* We treat any left string as the next flag */                               \
+        continue;                                                                     \
     }
 
 #define OPTIONAL_ARG(type, name, shortopt, longopt, arg_label, default, description, formatter, parser) \
