@@ -56,8 +56,8 @@
  * @param default The default value of the argument
  * @param description A description of the argument
  * @param formatter A formatter for printing the argument
- * @param parser A function for parsing the argument of type (int)(char* argv[i], type args->name,
- * char* next_char). This function should contain all parsing and error printing logic and return a
+ * @param parser A function for parsing the argument of type (int)(const char* const argv[i], type args->name,
+ * const char* next_char). This function should contain all parsing and error printing logic and return a
  * non-zero value accordingly. It should also print any errors that may occur in format "Error: %s".
  * Setting next_char to NULL or '\0' means that the parser is finished reading and can return
  */
@@ -97,36 +97,38 @@
  */
 
 // PARSERS
-static inline int parse_str(const char* text, char** out, char** advance) {
+static inline int parse_str(const char* const text, char** out, const char** advance) {
     *out = (char*)text;
     if (advance != NULL) *advance = NULL;
     return 0;
 }
 
-static inline int parse_char(const char* text, char* out, char** advance) {
+static inline int parse_char(const char* const text, char* out, const char** advance) {
     *out = text[0];
     if (advance != NULL) *advance = (char*)(text + 1);
     return 0;
 }
 
-#define NUMBER_PARSER(type, shorthand, func)                                           \
-    static inline int parse_##shorthand(const char* text, type* out, char** advance) { \
-        *out = (type)func(text, advance, 10);                                          \
-        if (errno != 0) {                                                              \
-            fprintf(stderr, "Error: failed to parse '%s' as " #type, text);            \
-            return 1;                                                                  \
-        }                                                                              \
-        return 0;                                                                      \
+#define NUMBER_PARSER(type, shorthand, func)                                                       \
+    static inline int parse_##shorthand(const char* const text, type* out, const char** advance) { \
+        errno = 0;                                                                                 \
+        *out = (type)func(text, (char**)advance, 10);                                              \
+        if (errno != 0) {                                                                          \
+            fprintf(stderr, "Error: failed to parse '%s' as " #type, text);                        \
+            return 1;                                                                              \
+        }                                                                                          \
+        return 0;                                                                                  \
     }
 
-#define FLOAT_PARSER(type, shorthand, func)                                            \
-    static inline int parse_##shorthand(const char* text, type* out, char** advance) { \
-        *out = (type)func(text, advance);                                              \
-        if (errno != 0) {                                                              \
-            fprintf(stderr, "Error: failed to parse '%s' as " #type, text);            \
-            return 1;                                                                  \
-        }                                                                              \
-        return 0;                                                                      \
+#define FLOAT_PARSER(type, shorthand, func)                                                        \
+    static inline int parse_##shorthand(const char* const text, type* out, const char** advance) { \
+        errno = 0;                                                                                 \
+        *out = (type)func(text, (char**)advance);                                                  \
+        if (errno != 0) {                                                                          \
+            fprintf(stderr, "Error: failed to parse '%s' as " #type, text);                        \
+            return 1;                                                                              \
+        }                                                                                          \
+        return 0;                                                                                  \
     }
 
 NUMBER_PARSER(unsigned long long, ull, strtoull)
@@ -234,7 +236,7 @@ static inline args_t make_default_args() {
  * @retval 1 Error
  * @retval 0 OK
  */
-static inline int parse_args(int argc, char* argv[], args_t* args) {
+static inline int parse_args(const int argc, const char* const argv[], args_t* args) {
     if (!argc || !argv) {
         fprintf(stderr, "Internal error: null args or argv.\n");
         return 1;
@@ -266,7 +268,7 @@ static inline int parse_args(int argc, char* argv[], args_t* args) {
             fprintf(stderr, "Error: option '%s' requires a value.\n", "--" #longopt);                          \
             return 1;                                                                                          \
         }                                                                                                      \
-        char* next_char = NULL;                                                                                \
+        const char* next_char = NULL;                                                                          \
         int error = parser(argv[++i], &args->name, &next_char);                                                \
         if (error != 0) {                                                                                      \
             return 1; /* The parser should notify the user of an error */                                      \
@@ -304,7 +306,7 @@ static inline int parse_args(int argc, char* argv[], args_t* args) {
 
         // Parse flags
         if (argv[i][0] == '-') {
-            char* curr_flag = argv[i] + 1;
+            const char* curr_flag = argv[i] + 1;
 #define GENERATE_SHORT_OPT(name, shortopt, parser)                                    \
     if (*curr_flag == #shortopt[0]) {                                                 \
         if (curr_flag[1] == '\0') {                                                   \
@@ -358,7 +360,7 @@ static inline int parse_args(int argc, char* argv[], args_t* args) {
 }
 
 // Display help string, given command used to launch program, e.g., argv[0]
-static inline void print_help(char* exec_alias) {
+static inline void print_help(const char* exec_alias) {
     // USAGE SECTION
     printf("USAGE:\n");
     printf("    %s ", exec_alias);

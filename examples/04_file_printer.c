@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static inline int parse_positive_int(const char* text, int* out, char** advance) {
-    *out = (int)strtol(text, advance, 10);
+static inline int parse_positive_int(const char* text, int* out, const char** advance) {
+    *out = (int)strtol(text, (char**)advance, 10);
     if (errno != 0) {
         fprintf(stderr, "Error: failed to parse '%s' as int\n", text);
         return 1;
@@ -33,7 +33,7 @@ static inline int parse_positive_int(const char* text, int* out, char** advance)
 
 #include "../includes/argus.h"
 
-int main(int argc, char* argv[]) {
+int main(int argc, const char* argv[]) {
     args_t args = make_default_args();
 
     if (parse_args(argc, argv, &args) || args.help) {

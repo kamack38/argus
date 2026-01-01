@@ -13,7 +13,7 @@
 
 #include "../includes/argus.h"
 
-int main(int argc, char* argv[]) {
+int main(const int argc, const char* argv[]) {
     args_t args = make_default_args();
 
     parse_args(argc, argv, &args);
